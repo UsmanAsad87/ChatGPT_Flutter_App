@@ -15,7 +15,7 @@ class TextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return SelectableText(
       label,
       style: TextStyle(
           color: color ?? Colors.white,
