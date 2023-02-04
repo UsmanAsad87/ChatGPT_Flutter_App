@@ -1,8 +1,14 @@
 import 'package:chatgpt_flutter/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+//
+// Color scaffoldBackgroundColor = const Color(0xFF343541);
+// Color cardColor = const Color(0xFF444654);
 
-Color scaffoldBackgroundColor = const Color(0xFF343541);
-Color cardColor = const Color(0xFF444654);
+
+//E1E1E1 text
+//#BB86FC icons
+Color scaffoldBackgroundColor = const Color(0xFF121212);
+Color cardColor = const Color(0xFF1E1E1E);
 //
 // List<String> models = [
 //   "Model1",

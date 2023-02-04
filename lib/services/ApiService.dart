@@ -10,26 +10,22 @@ import 'package:http/http.dart' as http;
 class ApiService {
   static Future<List<ModelsModel>> getModels() async {
     try {
-      print("hello");
       var response = await http.get(Uri.parse('$baseUrl/models'),
           headers: {'Authorization': 'Bearer $YOUR_API_KEY'});
-      print("hello2");
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
 
       if (jsonResponse['error'] != null) {
         throw HttpException(jsonResponse['error']['message']);
       }
-      print("jsonresponse: $jsonResponse");
-      print("hello3");
+      // print("jsonresponse: $jsonResponse");
       List temp = [];
       for (var value in jsonResponse['data']) {
         temp.add(value);
-        log('temp $value');
+        // log('temp $value');
       }
       return ModelsModel.modelFromSnapShot(temp);
     } catch (error) {
       log("error $error");
-      print("isman");
       rethrow;
     }
   }
@@ -38,7 +34,6 @@ class ApiService {
   static Future<List<ChatModel>> sendMessage(
       {required String message, required String modelId}) async {
     try {
-      print("hello_12");
       var response = await http.post(Uri.parse('$baseUrl/completions'),
           headers: {
             'Authorization': 'Bearer $YOUR_API_KEY',
@@ -49,13 +44,11 @@ class ApiService {
             "prompt": message,
             "max_tokens": 1000,
           }));
-      print("hello_122");
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
 
       if (jsonResponse['error'] != null) {
         throw HttpException(jsonResponse['error']['message']);
       }
-      print("hello_123");
       List<ChatModel> chatList = [];
 
       if (jsonResponse['choices'].length > 0) {
@@ -72,7 +65,6 @@ class ApiService {
       return chatList;
     } catch (error) {
       log("error $error");
-      print("isman");
       rethrow;
     }
   }
