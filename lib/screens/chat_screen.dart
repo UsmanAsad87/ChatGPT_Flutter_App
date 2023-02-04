@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:chatgpt_flutter/constants/constants.dart';
+import 'package:chatgpt_flutter/services/ApiService.dart';
+import 'package:chatgpt_flutter/services/services.dart';
 import 'package:chatgpt_flutter/widgets/chat_widget.dart';
 import 'package:chatgpt_flutter/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -47,28 +49,8 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: [
           IconButton(
             onPressed: () async {
-              await showModalBottomSheet(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(20)
-                  )
-                ),
-                backgroundColor: scaffoldBackgroundColor,
-                  context: context,
-                  builder: (context) {
-                    return Padding(
-                      padding: EdgeInsets.all(18.0),
-                      child: Row(
-                        children: const [
-                          Flexible(
-                              child: TextWidget(
-                            label: "Chosen Model: ",
-                            fontSize: 16,
-                          )),
-                        ],
-                      ),
-                    );
-                  });
+              await Services.showModalSheet(context);
+
             },
             icon: const Icon(Icons.more_vert_rounded, color: Colors.white),
           ),
@@ -115,7 +97,13 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                           try {
+                             await  ApiService.getModels();
+                           } on Exception catch (e) {
+                             print("Error: $e");
+                           }
+                          },
                           icon: const Icon(
                             Icons.send,
                             color: Colors.white,
