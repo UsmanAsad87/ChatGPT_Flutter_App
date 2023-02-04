@@ -103,7 +103,7 @@ class _ChatScreenState extends State<ChatScreen> {
               Material(
                 color: cardColor,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 2.0,horizontal: 16),
                   child: Row(
                     children: [
                       Expanded(
