@@ -4,6 +4,7 @@ import 'package:chatgpt_flutter/providers/models_provider.dart';
 import 'package:chatgpt_flutter/services/ApiService.dart';
 import 'package:chatgpt_flutter/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 //
 // class ModelsDropDownWidget extends StatefulWidget {
@@ -69,12 +70,20 @@ class _ModelsDropDownWidgetState extends State<ModelsDropDownWidget> {
     final modelsProvider = Provider.of<ModelsProvider>(context, listen: false);
     currentModel = modelsProvider.getCurrentModel;
     return FutureBuilder<List<ModelsModel>>(
-        future: modelsProvider.getAllModels(),
+        future: modelsProvider.getAllModels(context),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: TextWidget(
                 label: snapshot.error.toString(),
+              ),
+            );
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: SpinKitThreeBounce(
+                color: Colors.white,
+                size: 18,
               ),
             );
           }
