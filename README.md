@@ -1,17 +1,6 @@
 # chatgpt_flutter
 
-A new Flutter project.
+A chatBot app that uses openAI api.
 
-## Getting Started
+![ChatGPT](https://github.com/UsmanAsad87/ChatGPT_Flutter_App/assets/92229738/b7893ae0-ad7c-45b9-9e3f-0d785ad4ede7)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"# ChatGPT_Flutter_App" 
