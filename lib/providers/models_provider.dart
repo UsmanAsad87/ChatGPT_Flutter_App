@@ -4,7 +4,7 @@ import 'package:chatgpt_flutter/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class ModelsProvider with ChangeNotifier{
-  String currentModel='text-davinci-003';
+  String currentModel="whisper-1";//'gpt-3.5-turbo-16k-0613';
   String get getCurrentModel{
     return currentModel;
   }

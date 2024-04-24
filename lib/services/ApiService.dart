@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 class ApiService {
   static Future<List<ModelsModel>> getModels() async {
     try {
-      var response = await http.get(Uri.parse('$baseUrl/models'),
+      var response = await http.get(Uri.parse('$baseUrlModels/models'),
           headers: {'Authorization': 'Bearer $YOUR_API_KEY'});
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
 
@@ -23,6 +23,8 @@ class ApiService {
         temp.add(value);
         // log('temp $value');
       }
+      print(jsonResponse);
+
       return ModelsModel.modelFromSnapShot(temp);
     } catch (error) {
       log("error $error");
@@ -34,15 +36,17 @@ class ApiService {
   static Future<List<ChatModel>> sendMessage(
       {required String message, required String modelId}) async {
     try {
-      var response = await http.post(Uri.parse('$baseUrl/completions'),
+      var response = await http.post(Uri.parse('$baseUrlModels/chat/completions'),
           headers: {
             'Authorization': 'Bearer $YOUR_API_KEY',
             'Content-Type': 'application/json'
           },
           body: jsonEncode({
             "model": modelId,
-            "prompt": message,
-            "max_tokens": 1000,
+            'messages': [
+              {'role':"user",'content':message}
+            ],
+            "max_tokens": 100,
           }));
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
 
@@ -56,7 +60,7 @@ class ApiService {
         chatList = List.generate(
           jsonResponse['choices'].length,
           (index) => ChatModel(
-            msg: jsonResponse['choices'][index]['text'].toString().trim(),
+            msg: jsonResponse['choices'][index]['message']['content'].toString().trim(),
             chatIndex: 1,
           ),
         );
